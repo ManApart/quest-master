@@ -17,7 +17,13 @@ data class Blueprint(
 )
 
 @Serializable
-data class Coordinates(val X: Int, val Y: Int)
+data class Coordinates(var X: Int, var Y: Int) {
+    fun flip(){
+        val ogX = X
+        X = Y
+        Y = ogX
+    }
+}
 
 @Serializable
 data class PreciseCoordinates(val X: Float, val Y: Float)

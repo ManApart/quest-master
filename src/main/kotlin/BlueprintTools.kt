@@ -1,7 +1,9 @@
 import gameData.Blueprint
 
 fun Blueprint.rotate90(): Blueprint {
+    Size.flip()
     Tilemaps.Rooms.forEach { room ->
+        room.Bounds.Size.flip()
         room.updateTileMaps()
     }
     return this
