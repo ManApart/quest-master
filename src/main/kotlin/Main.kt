@@ -9,8 +9,10 @@ val jsonMapper = kotlinx.serialization.json.Json {
 }
 
 fun main() {
+    val selected = listOf("TileLine")
+//    val selected = listOf("FourSquare", "FourSquare 90", "FourSquare 180", "FourSquare 270")
     File("./input").listFiles()!!
-        .filter { it.name.contains("c532d476-0eaa-409f-ba2b-d4c35ac21428") }
+        .filter { selected.isEmpty() || selected.contains(it.nameWithoutExtension) }
         .map { it.name to jsonMapper.decodeFromString<Blueprint>(it.readText()) }
         .map { (name, data) -> name to data.transform() }
         .map { (name, data) -> name to jsonMapper.encodeToString(data) }
@@ -18,6 +20,7 @@ fun main() {
 }
 
 private fun Blueprint.transform(): Blueprint {
-    println("$Name ${Tilemaps.Rooms.first().tileMap}")
-    return rotate90()
+    print()
+    return this
+//    return rotate90().also { it.print() }
 }
